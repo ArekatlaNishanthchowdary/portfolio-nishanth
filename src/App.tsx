@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { ExternalLink, ChevronDown, Terminal, Download, Trophy, Briefcase, FlaskConical, Award } from 'lucide-react';
+import { ChevronDown, Terminal, Download, Trophy, Briefcase, Award } from 'lucide-react';
 
 const GithubIcon = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -105,13 +105,6 @@ const PROJECTS = [
   },
 ];
 
-const LOGS = [
-  { title: 'How I built a multi-agent coding workflow', type: 'Architecture' },
-  { title: 'Fine-tuning LLMs with Unsloth on Consumer GPUs', type: 'Experiment' },
-  { title: 'Building a VPN-like SaaS from scratch', type: 'Build Log' },
-  { title: 'Object detection using YOLO and OpenCV', type: 'Tutorial' }
-];
-
 const Navigation = ({ activeSection, scrollTo }: { activeSection: string; scrollTo: (id: string) => void }) => (
   <motion.nav
     initial={{ y: -100, x: '-50%' }}
@@ -123,7 +116,7 @@ const Navigation = ({ activeSection, scrollTo }: { activeSection: string; scroll
       <div className="text-white font-bold text-xl tracking-tighter cursor-pointer hover:opacity-80 transition-opacity" onClick={() => scrollTo('home')}>NC.</div>
     </div>
     <div className="hidden md:flex items-center justify-center gap-6">
-      {['home', 'experience', 'projects', 'logs', 'certifications', 'contact'].map(i => (
+      {['home', 'experience', 'projects', 'certifications', 'contact'].map(i => (
         <button key={i} onClick={() => scrollTo(i)} className={`text-xs font-bold uppercase tracking-widest transition-colors ${activeSection === i ? 'text-blue-400' : 'text-gray-400 hover:text-white'}`}>{i}</button>
       ))}
     </div>
@@ -271,23 +264,6 @@ const HorizontalProjects = () => {
   );
 };
 
-const LogsAndExperiments = () => (
-  <section id="logs" className="py-32 relative z-10 bg-black/80 backdrop-blur-lg border-y border-white/5">
-    <div className="max-w-5xl mx-auto px-6">
-      <h2 className="text-4xl font-bold mb-16 flex items-center gap-3 text-white"><FlaskConical className="text-orange-500" /> Research & Build Logs</h2>
-      <div className="grid md:grid-cols-2 gap-6">
-        {LOGS.map((log, i) => (
-          <a key={i} href="#" className="group block p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-blue-500/50 hover:bg-white/10 transition-all">
-            <span className="inline-block px-3 py-1 bg-white/10 rounded-md text-xs font-mono text-gray-400 mb-4 uppercase tracking-widest">{log.type}</span>
-            <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors line-clamp-2">{log.title}</h3>
-            <div className="mt-6 flex items-center text-sm font-medium text-gray-500 group-hover:text-white transition-colors">Read Log <ExternalLink className="w-4 h-4 ml-2" /></div>
-          </a>
-        ))}
-      </div>
-    </div>
-  </section>
-);
-
 const Certifications = () => (
   <section id="certifications" className="py-32 relative z-10 bg-black/60 backdrop-blur-md border-y border-white/5">
     <div className="max-w-5xl mx-auto px-6">
@@ -350,7 +326,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    const sections = ['home', 'experience', 'projects', 'logs', 'certifications', 'contact'];
+    const sections = ['home', 'experience', 'projects', 'certifications', 'contact'];
     const observer = new IntersectionObserver(
       entries => {
         entries.forEach(entry => { if (entry.isIntersecting) setActiveSection(entry.target.id); });
@@ -377,7 +353,6 @@ export default function App() {
         <Hero scrollTo={scrollTo} />
         <ExperienceAndSkills />
         <HorizontalProjects />
-        <LogsAndExperiments />
         <Certifications />
         <Contact />
       </main>
