@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { ExternalLink, ChevronDown, Terminal, Download, Trophy, Briefcase, FlaskConical } from 'lucide-react';
+import { ExternalLink, ChevronDown, Terminal, Download, Trophy, Briefcase, FlaskConical, Award } from 'lucide-react';
 
 const GithubIcon = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -29,16 +29,80 @@ const EXPERIENCE = [
 ];
 
 const ACHIEVEMENTS = [
+  'Gold Medal — 10th Research Day, SRM University (2026) for "Quantum Enhanced Wafer Failure Prediction using QSVM and QRF on 4 and 8 Qubits".',
+  'Silver Medal — 9th Research Day, SRM University (2025) for "Emergency Vehicle Detection and Traffic Management using YOLOv8x".',
   '6× Hackathon Winner & Finalist across national AI/ML competitions.',
-  'Gold Medal — SRM 10th Research Day for innovative deep learning research.',
-  'Silver Medal — SRM 9th Research Day for computer vision applications.'
+  'Team Leader, Robotics Club — Amrita Vishwa Vidyapeetham (Jan 2025 – Present).'
+];
+
+const CERTIFICATIONS = [
+  { title: 'Oracle Cloud Infrastructure 2025 Certified Generative AI Professional', issuer: 'Oracle', date: 'May 2025', id: '101666956OCI25GENAIPRO' },
+  { title: 'Oracle Cloud Infrastructure 2025 AI Foundations Associate', issuer: 'Oracle', date: 'May 2025', id: '101666956OCI25AICFA' },
+  { title: 'REST API Intermediate', issuer: 'HackerRank', date: 'Jun 2025', id: '53aca2a32f9f' },
+  { title: 'Joy of Computing with Python', issuer: 'NPTEL', date: 'Dec 2024', id: 'NPTEL24CS113S755802494' },
 ];
 
 const PROJECTS = [
-  { title: 'KTP Multi-Agent Coding Factory', desc: 'Multi-agent coding system using KTP-based task delegation between specialized agents.', problem: 'Writing boilerplate and integrating complex systems manually is extremely time-consuming and error-prone.', solution: 'Engineered an orchestrator that delegates tasks to backend, frontend, DB, tester, and integrator agents operating in parallel.', tags: ['PyTorch', 'LangChain', 'Python', 'Docker'], metrics: 'Reduced code scaffolding time by 85%.', color: 'from-blue-500 to-cyan-400' },
-  { title: 'IP & MAC Masking SaaS', desc: 'VPN-like Network System managing secure, masked infrastructure.', problem: 'Need for a lightweight, highly secure network masking solution without the overhead of traditional VPN protocols.', solution: 'Built a full-stack networking SaaS with Linux server orchestration and custom Windows client routing.', tags: ['C++', 'Linux', 'Networking', 'Node.js'], metrics: 'Sub-10ms latency overhead.', color: 'from-purple-500 to-pink-400' },
-  { title: 'LLM Fine-Tuning Engine', desc: 'Custom model development utilizing Unsloth and quantization.', problem: 'Running 7B+ parameter models locally requires excessive VRAM and computational power.', solution: 'Implemented 4-bit quantization pipelines and LoRA fine-tuning using Unsloth to deploy custom models on consumer GPUs.', tags: ['Unsloth', 'CUDA', 'Hugging Face', 'vLLM'], metrics: 'Achieved 4x faster inference.', color: 'from-emerald-500 to-teal-400' },
-  { title: 'Multimodal Vision System', desc: 'Real-time object detection and segmentation engine.', problem: 'Standard bounding boxes lack the pixel-perfect precision required for complex visual reasoning tasks.', solution: 'Combined YOLOv8 for rapid object localization with SAM (Segment Anything Model) for zero-shot masking.', tags: ['OpenCV', 'YOLO', 'SAM', 'PyTorch'], metrics: '94% mAP at 30 FPS inference.', color: 'from-orange-500 to-red-400' }
+  {
+    title: 'Project Hollow',
+    desc: 'Autonomous Windows OS automation agent powered by LLMs with closed-loop verification and hierarchical memory.',
+    problem: 'Traditional LLM agents crash on long tasks due to open-loop failures (no action verification) and context window exhaustion from unbounded memory growth.',
+    solution: 'Built a closed-loop agent with a "Memory Janitor" algorithm that compresses logs into semantic summaries in real-time, keeping memory at O(1). Uses Windows Accessibility API + Moondream vision for hybrid grounding, with Llama 3.2/4 via Groq for sub-second reasoning.',
+    tags: ['Llama 3.2/4', 'Groq', 'ChromaDB', 'Neo4j', 'Moondream', 'Python'],
+    metrics: '78% task completion rate across 25 eval tasks. Memory stays flat on indefinite runs.',
+    color: 'from-violet-500 to-purple-400',
+    github: 'https://github.com/ArekatlaNishanthchowdary'
+  },
+  {
+    title: 'Smart Traffic Management System',
+    desc: 'Real-time vehicle detection and adaptive traffic control pipeline using deep learning.',
+    problem: 'Static traffic signals cause emergency vehicle delays and inefficient flow — no real-time awareness of road conditions.',
+    solution: 'Built a YOLOv8 + OpenCV pipeline with frame-wise tracking, virtual zone-based decision logic, and GPU-optimized real-time inference for adaptive signal control.',
+    tags: ['YOLOv8', 'OpenCV', 'Python', 'IoT', 'Pandas', 'NumPy'],
+    metrics: 'Reduced emergency vehicle response time by 35%.',
+    color: 'from-orange-500 to-red-400',
+    github: 'https://github.com/ArekatlaNishanthchowdary'
+  },
+  {
+    title: 'WARP — Waste Analysis Report Project',
+    desc: 'AI-powered environmental damage assessment platform generating automated reports for government intervention.',
+    problem: 'Environmental damage assessment is slow, manual, and inconsistent — delaying government response to waste and pollution incidents.',
+    solution: 'Integrated Gemini API for AI-driven damage analysis into a full-stack Flask + Firebase pipeline that auto-generates structured reports from uploaded images.',
+    tags: ['Gemini API', 'Firebase', 'Flask', 'Python'],
+    metrics: 'End-to-end automated report generation from image upload to structured output.',
+    color: 'from-emerald-500 to-teal-400',
+    github: 'https://github.com/ArekatlaNishanthchowdary'
+  },
+  {
+    title: 'LLM Fine-Tuning Engine',
+    desc: 'Custom model development utilizing Unsloth and 4-bit quantization for consumer GPU deployment.',
+    problem: 'Running 7B+ parameter models locally requires excessive VRAM and computational power, making local LLM deployment impractical.',
+    solution: 'Implemented 4-bit quantization pipelines and LoRA fine-tuning using Unsloth to deploy custom models on consumer GPUs with minimal memory overhead.',
+    tags: ['Unsloth', 'CUDA', 'Hugging Face', 'vLLM', 'PyTorch'],
+    metrics: 'Achieved 4x faster inference with drastically reduced VRAM usage.',
+    color: 'from-blue-500 to-cyan-400',
+    github: 'https://github.com/ArekatlaNishanthchowdary'
+  },
+  {
+    title: 'Multimodal Vision System',
+    desc: 'Real-time object detection and pixel-perfect segmentation engine combining YOLO and SAM.',
+    problem: 'Standard bounding boxes lack the pixel-perfect precision required for complex visual reasoning and surgical/medical imaging tasks.',
+    solution: 'Combined YOLOv8 for rapid object localization with SAM (Segment Anything Model) for zero-shot instance masking in a unified inference pipeline.',
+    tags: ['OpenCV', 'YOLOv8', 'SAM', 'PyTorch'],
+    metrics: '94% mAP at 30 FPS real-time inference.',
+    color: 'from-pink-500 to-rose-400',
+    github: 'https://github.com/ArekatlaNishanthchowdary'
+  },
+  {
+    title: 'KTP Multi-Agent Coding Factory',
+    desc: 'Multi-agent coding system using KTP-based task delegation between specialized parallel agents.',
+    problem: 'Writing boilerplate and integrating complex systems manually is extremely time-consuming and error-prone.',
+    solution: 'Engineered an orchestrator that delegates tasks to backend, frontend, DB, tester, and integrator agents operating in parallel with structured handoffs.',
+    tags: ['PyTorch', 'LangChain', 'Python', 'Docker'],
+    metrics: 'Reduced code scaffolding time by 85%.',
+    color: 'from-yellow-500 to-amber-400',
+    github: 'https://github.com/ArekatlaNishanthchowdary'
+  },
 ];
 
 const LOGS = [
@@ -59,7 +123,7 @@ const Navigation = ({ activeSection, scrollTo }: { activeSection: string; scroll
       <div className="text-white font-bold text-xl tracking-tighter cursor-pointer hover:opacity-80 transition-opacity" onClick={() => scrollTo('home')}>NC.</div>
     </div>
     <div className="hidden md:flex items-center justify-center gap-6">
-      {['home', 'experience', 'projects', 'logs', 'contact'].map(i => (
+      {['home', 'experience', 'projects', 'logs', 'certifications', 'contact'].map(i => (
         <button key={i} onClick={() => scrollTo(i)} className={`text-xs font-bold uppercase tracking-widest transition-colors ${activeSection === i ? 'text-blue-400' : 'text-gray-400 hover:text-white'}`}>{i}</button>
       ))}
     </div>
@@ -158,16 +222,17 @@ const ExperienceAndSkills = () => (
 const HorizontalProjects = () => {
   const targetRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: targetRef });
-  const x = useTransform(scrollYProgress, [0, 1], ['0%', '-75%']);
+  // 6 projects: need to scroll through 5 extra cards (each ~75vw wide)
+  const x = useTransform(scrollYProgress, [0, 1], ['0%', '-83.33%']);
 
   return (
-    <section id="projects" ref={targetRef} className="relative h-[400vh] bg-transparent">
+    <section id="projects" ref={targetRef} className="relative h-[600vh] bg-transparent">
       <div className="sticky top-0 h-screen flex items-center overflow-hidden pt-20">
         <div className="absolute top-10 left-10 md:left-20 z-20">
           <h2 className="text-4xl md:text-5xl font-extrabold tracking-tighter text-white">Featured AI Systems</h2>
           <div className="h-1 w-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mt-4" />
         </div>
-        <motion.div style={{ x }} className="flex gap-10 px-10 md:px-20 w-[400vw] items-center mt-12">
+        <motion.div style={{ x }} className="flex gap-10 px-10 md:px-20 w-[600vw] items-center mt-12">
           {PROJECTS.map((p, i) => (
             <div key={i} className="w-[85vw] md:w-[70vw] h-[75vh] shrink-0 bg-black/80 backdrop-blur-xl border border-white/10 rounded-[2rem] p-8 md:p-12 flex flex-col relative overflow-hidden group">
               <div className="flex justify-between items-start mb-8 relative z-10">
@@ -178,8 +243,7 @@ const HorizontalProjects = () => {
                   <h3 className="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tighter">{p.title}</h3>
                   <p className="text-xl text-gray-400 font-light mb-8">{p.desc}</p>
                   <div className="flex items-center gap-4 mt-auto">
-                    <a href="#" className="flex items-center gap-2 px-6 py-3 bg-white text-black font-bold text-sm rounded-full hover:bg-gray-200 transition-colors"><ExternalLink className="w-4 h-4" /> Live Demo</a>
-                    <a href="#" className="flex items-center gap-2 px-6 py-3 bg-white/10 text-white font-bold text-sm rounded-full hover:bg-white/20 transition-colors"><GithubIcon className="w-4 h-4" /> Code</a>
+                    <a href={p.github} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-6 py-3 bg-white/10 text-white font-bold text-sm rounded-full hover:bg-white/20 transition-colors"><GithubIcon className="w-4 h-4" /> Code</a>
                   </div>
                 </div>
                 <div className="lg:col-span-7 grid grid-rows-2 gap-4 h-full">
@@ -224,6 +288,35 @@ const LogsAndExperiments = () => (
   </section>
 );
 
+const Certifications = () => (
+  <section id="certifications" className="py-32 relative z-10 bg-black/60 backdrop-blur-md border-y border-white/5">
+    <div className="max-w-5xl mx-auto px-6">
+      <h2 className="text-4xl font-extrabold mb-12 flex items-center gap-4 text-white tracking-tighter">
+        <Award className="text-yellow-400 w-8 h-8" /> Certifications
+      </h2>
+      <div className="grid md:grid-cols-2 gap-6">
+        {CERTIFICATIONS.map((cert, i) => (
+          <div key={i} className="p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-yellow-400/30 transition-colors">
+            <div className="flex items-start gap-4">
+              <div className="p-3 rounded-xl bg-yellow-400/10 border border-yellow-400/20 shrink-0">
+                <Award className="w-5 h-5 text-yellow-400" />
+              </div>
+              <div>
+                <h3 className="text-white font-bold text-lg leading-snug mb-2">{cert.title}</h3>
+                <div className="flex flex-wrap gap-2 items-center text-sm">
+                  <span className="text-yellow-400 bg-yellow-400/10 px-3 py-1 rounded-full font-mono">{cert.issuer}</span>
+                  <span className="text-gray-500">{cert.date}</span>
+                </div>
+                <p className="text-gray-600 font-mono text-xs mt-3">ID: {cert.id}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
 const Contact = () => (
   <section id="contact" className="py-32 relative z-10 bg-black flex flex-col items-center justify-center min-h-[80vh]">
     <div className="text-center relative z-20">
@@ -257,7 +350,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    const sections = ['home', 'experience', 'projects', 'logs', 'contact'];
+    const sections = ['home', 'experience', 'projects', 'logs', 'certifications', 'contact'];
     const observer = new IntersectionObserver(
       entries => {
         entries.forEach(entry => { if (entry.isIntersecting) setActiveSection(entry.target.id); });
@@ -285,6 +378,7 @@ export default function App() {
         <ExperienceAndSkills />
         <HorizontalProjects />
         <LogsAndExperiments />
+        <Certifications />
         <Contact />
       </main>
     </div>
