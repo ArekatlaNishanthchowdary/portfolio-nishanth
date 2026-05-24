@@ -240,15 +240,15 @@ const ExperienceAndSkills = () => (
             <div className="space-y-6">
               {EXPERIENCE.map((exp, i) => (
                 <TiltCard key={i} intensity={5} className="rounded-2xl">
-                  <div className="p-8 rounded-2xl bg-white/[0.03] border border-white/[0.07] hover:border-blue-500/30 transition-colors duration-500 group">
+                  <div className="p-8 rounded-2xl bg-white/[0.03] border border-white/[0.07] hover:border-white/20 transition-colors duration-500 group">
                     <div className="flex items-start justify-between mb-4">
                       <div>
-                        <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">{exp.role}</h3>
-                        <p className="text-blue-400/80 text-sm font-mono mt-1">{exp.company}</p>
+                        <h3 className="text-xl font-bold text-white">{exp.role}</h3>
+                        <p className="text-gray-400 text-sm font-mono mt-1">{exp.company}</p>
                       </div>
                       <span className="text-xs text-gray-600 font-mono bg-white/5 px-3 py-1 rounded-full border border-white/5 shrink-0 ml-4">{exp.date}</span>
                     </div>
-                    <p className="text-gray-400 text-sm leading-relaxed">{exp.desc}</p>
+                    <p className="text-gray-300 text-base leading-relaxed">{exp.desc}</p>
                   </div>
                 </TiltCard>
               ))}
@@ -268,14 +268,14 @@ const ExperienceAndSkills = () => (
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                  className="flex items-start gap-5 p-6 rounded-2xl bg-white/[0.03] border border-white/[0.07] hover:border-purple-500/30 transition-colors duration-500 group"
+                  className="flex items-start gap-5 p-6 rounded-2xl bg-white/[0.03] border border-white/[0.07] hover:border-white/20 transition-colors duration-500 group"
                 >
-                  <div className="p-2.5 rounded-xl bg-purple-500/10 border border-purple-500/20 shrink-0 group-hover:bg-purple-500/20 transition-colors">
-                    <Trophy className="w-4 h-4 text-purple-400" />
+                  <div className="p-2.5 rounded-xl bg-white/5 border border-white/10 shrink-0">
+                    <Trophy className="w-4 h-4 text-white/50" />
                   </div>
                   <div>
-                    <p className="text-white font-bold text-sm">{ach.title} — <span className="text-gray-400 font-normal">{ach.event}</span></p>
-                    <p className="text-gray-500 text-xs mt-1 italic">{ach.detail}</p>
+                    <p className="text-white font-bold text-base">{ach.title} — <span className="text-gray-400 font-normal">{ach.event}</span></p>
+                    <p className="text-gray-500 text-sm mt-1">{ach.detail}</p>
                   </div>
                 </motion.div>
               ))}
@@ -297,15 +297,15 @@ const ExperienceAndSkills = () => (
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 whileHover={{ y: -4 }}
-                className="p-6 rounded-2xl bg-white/[0.03] border border-white/[0.07] hover:border-emerald-500/30 transition-all duration-300 group"
+                className="p-6 rounded-2xl bg-white/[0.03] border border-white/[0.07] hover:border-white/20 transition-all duration-300 group"
               >
                 <div className="flex items-center gap-2 mb-4">
-                  <Cpu className="w-3.5 h-3.5 text-emerald-400 opacity-60" />
+                  <Cpu className="w-3.5 h-3.5 text-white/30" />
                   <h3 className="text-gray-500 font-mono text-[10px] uppercase tracking-[0.2em]">{stack.category}</h3>
                 </div>
                 <div className="flex flex-wrap gap-1.5">
                   {stack.items.map(item => (
-                    <span key={item} className="px-2.5 py-1 bg-white/5 border border-white/[0.07] rounded-md text-xs text-gray-300 font-medium group-hover:border-emerald-500/20 transition-colors">
+                    <span key={item} className="px-2.5 py-1 bg-white/5 border border-white/[0.07] rounded-md text-sm text-gray-300 font-medium">
                       {item}
                     </span>
                   ))}
@@ -334,20 +334,16 @@ const ProjectCard = ({ p, i }: { p: typeof PROJECTS[0]; i: number }) => {
     >
       <TiltCard intensity={8} className="rounded-3xl h-full">
         <div
-          className="relative rounded-3xl border border-white/[0.07] overflow-hidden h-full flex flex-col transition-all duration-500 group"
+          className="relative rounded-3xl border border-white/[0.07] overflow-hidden h-full flex flex-col transition-all duration-500 group hover:border-blue-500/30"
           style={{
-            background: hovered
-              ? `linear-gradient(135deg, ${p.accent}08 0%, #000 60%)`
-              : 'rgba(255,255,255,0.02)',
-            borderColor: hovered ? `${p.accent}40` : 'rgba(255,255,255,0.07)',
+            background: hovered ? 'rgba(59,130,246,0.04)' : 'rgba(255,255,255,0.02)',
           }}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
         >
           {/* Glow */}
           <motion.div
-            className="absolute top-0 left-0 w-full h-1 rounded-t-3xl"
-            style={{ background: `linear-gradient(90deg, transparent, ${p.accent}, transparent)` }}
+            className="absolute top-0 left-0 w-full h-[1px] rounded-t-3xl bg-gradient-to-r from-transparent via-blue-500/60 to-transparent"
             animate={{ opacity: hovered ? 1 : 0 }}
             transition={{ duration: 0.3 }}
           />
@@ -372,18 +368,15 @@ const ProjectCard = ({ p, i }: { p: typeof PROJECTS[0]; i: number }) => {
             </div>
 
             {/* Title */}
-            <h3 className="text-2xl font-black text-white tracking-tight mb-3 group-hover:text-transparent group-hover:bg-clip-text transition-all duration-300"
-              style={{ backgroundImage: `linear-gradient(135deg, #fff, ${p.accent})` }}
-            >
+            <h3 className="text-2xl font-black text-white tracking-tight mb-3 group-hover:text-blue-400 transition-colors duration-300">
               {p.title}
             </h3>
-            <p className="text-gray-400 text-sm leading-relaxed mb-6">{p.desc}</p>
+            <p className="text-gray-300 text-base leading-relaxed mb-6">{p.desc}</p>
 
             {/* Tags */}
             <div className="flex flex-wrap gap-1.5 mb-6">
               {p.tags.map(tag => (
-                <span key={tag} className="px-2.5 py-1 text-xs font-mono rounded-md border"
-                  style={{ color: p.accent, borderColor: `${p.accent}30`, background: `${p.accent}08` }}>
+                <span key={tag} className="px-3 py-1 text-xs font-mono rounded-md border border-white/10 bg-white/5 text-gray-300">
                   {tag}
                 </span>
               ))}
@@ -392,18 +385,18 @@ const ProjectCard = ({ p, i }: { p: typeof PROJECTS[0]; i: number }) => {
             {/* Problem / Solution */}
             <div className="grid grid-cols-2 gap-3 mb-6 flex-1">
               <div className="p-4 rounded-xl bg-white/[0.03] border border-white/[0.05]">
-                <p className="text-[10px] font-bold uppercase tracking-widest text-red-400/70 mb-2">Problem</p>
-                <p className="text-gray-400 text-xs leading-relaxed">{p.problem}</p>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-white/40 mb-2">Problem</p>
+                <p className="text-gray-300 text-sm leading-relaxed">{p.problem}</p>
               </div>
               <div className="p-4 rounded-xl bg-white/[0.03] border border-white/[0.05]">
-                <p className="text-[10px] font-bold uppercase tracking-widest text-emerald-400/70 mb-2">Solution</p>
-                <p className="text-gray-400 text-xs leading-relaxed">{p.solution}</p>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-white/40 mb-2">Solution</p>
+                <p className="text-gray-300 text-sm leading-relaxed">{p.solution}</p>
               </div>
             </div>
 
             {/* Metrics */}
             <div className="flex items-center justify-between pt-4 border-t border-white/[0.05]">
-              <p className="text-sm font-bold" style={{ color: p.accent }}>{p.metrics}</p>
+              <p className="text-sm font-bold text-blue-400">{p.metrics}</p>
               <motion.div animate={{ x: hovered ? 4 : 0 }} transition={{ duration: 0.2 }}>
                 <ArrowUpRight className="w-4 h-4 text-gray-600" />
               </motion.div>
@@ -460,20 +453,20 @@ const Certifications = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            whileHover={{ y: -4, borderColor: 'rgba(234,179,8,0.3)' }}
-            className="p-7 rounded-2xl bg-white/[0.03] border border-white/[0.07] transition-all duration-300 group cursor-default"
+            whileHover={{ y: -4 }}
+            className="p-7 rounded-2xl bg-white/[0.03] border border-white/[0.07] hover:border-white/20 transition-all duration-300 group cursor-default"
           >
             <div className="flex items-start gap-4">
-              <div className="p-3 rounded-xl bg-yellow-400/10 border border-yellow-400/20 shrink-0 group-hover:bg-yellow-400/15 transition-colors">
-                <Award className="w-5 h-5 text-yellow-400" />
+              <div className="p-3 rounded-xl bg-white/5 border border-white/10 shrink-0">
+                <Award className="w-5 h-5 text-white/50" />
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="text-white font-bold text-base leading-snug mb-3 group-hover:text-yellow-100 transition-colors">{cert.title}</h3>
+                <h3 className="text-white font-bold text-base leading-snug mb-3">{cert.title}</h3>
                 <div className="flex flex-wrap gap-2 items-center">
-                  <span className="text-yellow-400 bg-yellow-400/10 px-3 py-1 rounded-full text-xs font-mono border border-yellow-400/20">{cert.issuer}</span>
-                  <span className="text-gray-500 text-xs">{cert.date}</span>
+                  <span className="text-gray-300 bg-white/5 px-3 py-1 rounded-full text-xs font-mono border border-white/10">{cert.issuer}</span>
+                  <span className="text-gray-500 text-sm">{cert.date}</span>
                 </div>
-                <p className="text-gray-700 font-mono text-[10px] mt-3 truncate">ID: {cert.id}</p>
+                <p className="text-gray-600 font-mono text-xs mt-3 truncate">ID: {cert.id}</p>
               </div>
             </div>
           </motion.div>
