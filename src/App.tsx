@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring, useInView, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Download, Trophy, Award, ArrowUpRight, Cpu } from 'lucide-react';
-import ParticleField from './components/ParticleField';
+import SideRays from './components/SideRays';
 import Cursor from './components/Cursor';
 import TiltCard from './components/TiltCard';
 import MagneticButton from './components/MagneticButton';
@@ -107,23 +107,27 @@ const Hero = ({ scrollTo }: { scrollTo: (id: string) => void }) => {
         </motion.div>
 
         {/* Main heading */}
-        <div className="mb-6 overflow-hidden">
-          <motion.h1
-            className="text-[clamp(4rem,12vw,10rem)] font-black tracking-[-0.04em] leading-[0.9] text-white"
-            initial={{ y: 120, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1.2, delay: 1, ease: [0.16, 1, 0.3, 1] }}
-          >
-            Nishanth
-          </motion.h1>
-          <motion.h1
-            className="text-[clamp(4rem,12vw,10rem)] font-black tracking-[-0.04em] leading-[0.9] text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-violet-400 to-cyan-400"
-            initial={{ y: 120, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1.2, delay: 1.1, ease: [0.16, 1, 0.3, 1] }}
-          >
-            Chowdary
-          </motion.h1>
+        <div className="mb-6">
+          <div className="overflow-hidden pb-12 -mb-12">
+            <motion.h1
+              className="text-[clamp(4rem,12vw,10rem)] font-black tracking-[-0.04em] leading-[0.9] text-white"
+              initial={{ y: 120, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 1.2, delay: 1, ease: [0.16, 1, 0.3, 1] }}
+            >
+              Nishanth
+            </motion.h1>
+          </div>
+          <div className="overflow-hidden pb-12 -mb-12">
+            <motion.h1
+              className="text-[clamp(4rem,12vw,10rem)] font-black tracking-[-0.04em] leading-[0.9] text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-violet-400 to-cyan-400"
+              initial={{ y: 120, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 1.2, delay: 1.1, ease: [0.16, 1, 0.3, 1] }}
+            >
+              Chowdary
+            </motion.h1>
+          </div>
         </div>
 
         {/* Subtitle */}
@@ -202,11 +206,15 @@ const Hero = ({ scrollTo }: { scrollTo: (id: string) => void }) => {
 const SectionReveal = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-15% 0px' });
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
+  const y = useTransform(scrollYProgress, [0, 1], [80, -80]);
+
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 60 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      style={{ y }}
+      initial={{ opacity: 0 }}
+      animate={isInView ? { opacity: 1 } : {}}
       transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
       className={className}
     >
@@ -324,12 +332,15 @@ const ProjectCard = ({ p, i }: { p: typeof PROJECTS[0]; i: number }) => {
   const [hovered, setHovered] = useState(false);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-10% 0px' });
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
+  const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 80 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      style={{ y }}
+      initial={{ opacity: 0 }}
+      animate={isInView ? { opacity: 1 } : {}}
       transition={{ duration: 0.8, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
     >
       <TiltCard intensity={8} className="rounded-3xl h-full">
@@ -386,11 +397,11 @@ const ProjectCard = ({ p, i }: { p: typeof PROJECTS[0]; i: number }) => {
             <div className="grid grid-cols-2 gap-3 mb-6 flex-1">
               <div className="p-4 rounded-xl bg-white/[0.03] border border-white/[0.05]">
                 <p className="text-[10px] font-bold uppercase tracking-widest text-white/40 mb-2">Problem</p>
-                <p className="text-gray-300 text-sm leading-relaxed">{p.problem}</p>
+                <p className="text-gray-300 text-sm leading-relaxed break-words">{p.problem}</p>
               </div>
               <div className="p-4 rounded-xl bg-white/[0.03] border border-white/[0.05]">
                 <p className="text-[10px] font-bold uppercase tracking-widest text-white/40 mb-2">Solution</p>
-                <p className="text-gray-300 text-sm leading-relaxed">{p.solution}</p>
+                <p className="text-gray-300 text-sm leading-relaxed break-words">{p.solution}</p>
               </div>
             </div>
 
@@ -634,8 +645,10 @@ export default function App() {
       {/* Custom cursor */}
       <Cursor />
 
-      {/* 3D particle background */}
-      <ParticleField />
+      {/* Side rays background */}
+      <div className="fixed inset-0 z-0">
+        <SideRays />
+      </div>
 
       {/* Noise texture overlay */}
       <div

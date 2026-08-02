@@ -17,7 +17,7 @@ export function TextReveal({ children, className = '', delay = 0, once = true }:
   return (
     <span ref={ref} className={`inline-flex flex-wrap gap-x-[0.25em] ${className}`}>
       {words.map((word, i) => (
-        <span key={i} className="overflow-hidden inline-block">
+        <span key={i} className="overflow-hidden inline-block pb-[0.2em] -mb-[0.2em]">
           <motion.span
             className="inline-block"
             initial={{ y: '110%', opacity: 0 }}
@@ -44,7 +44,7 @@ export function CharReveal({ children, className = '', delay = 0 }: TextRevealPr
   return (
     <span ref={ref} className={`inline-flex flex-wrap ${className}`}>
       {chars.map((char, i) => (
-        <span key={i} className="overflow-hidden inline-block">
+        <span key={i} className="overflow-hidden inline-block pb-[0.2em] -mb-[0.2em]">
           <motion.span
             className="inline-block"
             initial={{ y: '110%' }}
