@@ -37,6 +37,28 @@ export const CERTIFICATIONS = [
 
 export const PROJECTS = [
   {
+    title: 'Ask My Docs',
+    year: '2026',
+    desc: 'Hybrid-retrieval RAG in a single Go binary — enforced citations, three grounding guards, runs fully local.',
+    problem: 'RAG systems confidently answer questions their documents never actually cover.',
+    solution: 'A confidence gate, citation validation, and entailment check refuse the answer rather than hallucinate.',
+    tags: ['Go', 'Qdrant', 'Ollama', 'RAG', 'Reranking'],
+    metrics: 'nDCG@10 0.905 · fully offline capable',
+    accent: '#eab308',
+    github: 'https://github.com/ArekatlaNishanthchowdary/Ask-My-Docs',
+  },
+  {
+    title: 'ShadowAssist',
+    year: '2026',
+    desc: 'Invisible AI interview copilot — a stealth overlay answering by voice or screenshot, hidden from screen share.',
+    problem: 'Screen-share tools expose the whole desktop, leaving nowhere for real-time help during interviews.',
+    solution: 'An overlay excluded from capture APIs streams answers via voice or screenshot, invisible to Zoom and OBS.',
+    tags: ['Electron', 'Gemini API', 'Claude Code', 'Whisper', 'Node.js'],
+    metrics: '4 skill modes · invisible to screen capture',
+    accent: '#ec4899',
+    github: 'https://github.com/ArekatlaNishanthchowdary/ShdowAssist',
+  },
+  {
     title: "Senpai's PDF Workshop",
     year: '2026',
     desc: 'Local-first PDF toolkit with 46 operations across a PySide6 desktop app and CLI, generated from a single operation registry.',
