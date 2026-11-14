@@ -7,7 +7,6 @@ import { useModalStore } from "../stores/modalStore";
 
 import About from "../../components/About/About";
 import Project from "../../components/Project/Project";
-import nishanthSignData from "./nishanthSignGeom.json";
 
 export default function Model({ progress = 0, pulseIntensity = 0, ...props }) {
   const { nodes, materials } = useGLTFWithKTX2(
@@ -222,24 +221,6 @@ export default function Model({ progress = 0, pulseIntensity = 0, ...props }) {
     return geom;
   }, []);
 
-  // 3D Native Minecraft Voxel Font for Nishanth's
-  const nishanthSignGeom = useMemo(() => {
-    const geom = new THREE.BufferGeometry();
-    geom.setAttribute(
-      "position",
-      new THREE.BufferAttribute(new Float32Array(nishanthSignData.positions), 3)
-    );
-    geom.setAttribute(
-      "normal",
-      new THREE.BufferAttribute(new Float32Array(nishanthSignData.normals), 3)
-    );
-    geom.setAttribute(
-      "uv",
-      new THREE.BufferAttribute(new Float32Array(nishanthSignData.uvs), 2)
-    );
-    return geom;
-  }, []);
-
   return (
     <group {...props} dispose={null}>
       {/* Original detail geometry */}
@@ -345,12 +326,6 @@ export default function Model({ progress = 0, pulseIntensity = 0, ...props }) {
           </mesh>
         </group>
       ))}
-
-      {/* 3D Native Voxel Text: Nishanth's */}
-      <mesh
-        geometry={nishanthSignGeom}
-        material={materials["MergedBake_Baked.010"]}
-      />
 
       {/* 3D In-Game Photo Frames in About Me section */}
       <mesh
