@@ -92,7 +92,7 @@ const projectData = {
         paragraphs: [
           " - Tech: PyTorch, FT-Transformer, Hard-Concrete Gating, SupCon, Scikit-learn, FastAPI, Chart.js",
           " - Benchmark: 98.6% L0 Accuracy (0.972 MCC) · 98.3% L1 Accuracy (0.986 Macro-F1) on CIC-IIoT-2025",
-          " - Academic Guide: Dr. Raj Kumar Batchu, School of Computing, Amrita Vishwa Vidyapeetham",
+          " - Academic Guide: Dr. Raj Kumar Batchu, School of Computing, Amrita Vishwa Vidyapeetham, Amaravati",
         ],
       },
     ],

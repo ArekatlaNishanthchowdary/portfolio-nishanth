@@ -10,7 +10,7 @@ const aboutMeData = {
       {
         header: "About Me",
         paragraphs: [
-          "Hey there👋! Welcome to my Minecraft folio! My name is Nishanth (Arekatla Nishanth Chowdary). I'm an AI Developer and Systems Engineer currently pursuing B.Tech CSE (AI) at Amrita Vishwa Vidyapeetham, Hyderabad.",
+          "Hey there👋! Welcome to my Minecraft folio! My name is Nishanth (Arekatla Nishanth Chowdary). I'm an AI Developer and Systems Engineer currently pursuing B.Tech CSE (AI) at Amrita Vishwa Vidyapeetham, Amaravati.",
           "I have a deep passion for building practical, high-performance systems — from autonomous computer-use agents and local-first RAG pipelines to fine-tuning large language models and computer vision pipelines.",
           "When I'm not training models or architecting software, I lead the Robotics Club at Amrita, mentor juniors in computer vision and path planning, compete in AI hackathons (6× winner/finalist), and explore emerging research.",
         ],

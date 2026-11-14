@@ -9,7 +9,7 @@ const infoMeData = {
       {
         header: "👋 About Me",
         paragraphs: [
-          "Hey there! I'm *Nishanth (Arekatla Nishanth Chowdary)*, a B.Tech CSE (AI) student at *Amrita Vishwa Vidyapeetham*, Hyderabad.",
+          "Hey there! I'm *Nishanth (Arekatla Nishanth Chowdary)*, a B.Tech CSE (AI) student at *Amrita Vishwa Vidyapeetham*, Amaravati.",
           "I specialize in building *autonomous agents*, *hybrid RAG pipelines*, *local-first tools*, and *scalable AI infrastructure*. Passionate about combining clean software architecture with real-world machine intelligence.",
         ],
       },
