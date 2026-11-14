@@ -104,6 +104,7 @@ const Experience = () => {
   return (
     <>
       <Canvas flat={true} eventSource={document.getElementById("root")}>
+        <color attach="background" args={["#2c2727"]} />
         <Scene
           cameraGroup={cameraGroup}
           camera={camera}

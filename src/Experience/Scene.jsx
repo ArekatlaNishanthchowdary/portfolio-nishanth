@@ -202,12 +202,12 @@ const Scene = ({
         background={true}
         backgroundRotation={[0, Math.PI / 2, 0]}
         files={[
-          "/cubemap/px.webp",
-          "/cubemap/nx.webp",
-          "/cubemap/py.webp",
-          "/cubemap/ny.webp",
-          "/cubemap/pz.webp",
-          "/cubemap/nz.webp",
+          `${import.meta.env.BASE_URL}cubemap/px.webp`,
+          `${import.meta.env.BASE_URL}cubemap/nx.webp`,
+          `${import.meta.env.BASE_URL}cubemap/py.webp`,
+          `${import.meta.env.BASE_URL}cubemap/ny.webp`,
+          `${import.meta.env.BASE_URL}cubemap/pz.webp`,
+          `${import.meta.env.BASE_URL}cubemap/nz.webp`,
         ]}
       />
       <Suspense fallback={null}>
