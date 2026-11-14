@@ -1,73 +1,47 @@
-# React + TypeScript + Vite
+# Nishanth's Minecraft Folio 🎮
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An interactive, 3D Minecraft-themed portfolio for **Nishanth (Arekatla Nishanth Chowdary)** — AI Developer & Systems Engineer.
 
-Currently, two official plugins are available:
+Built with **React**, **Three.js / React Three Fiber (@react-three/fiber)**, **Drei (@react-three/drei)**, **Zustand**, and **Vite**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Features
 
-## React Compiler
+- **Interactive 3D Minecraft Scene**: Real-time camera scrolling through a handcrafted voxel room with day/night aesthetic.
+- **Selected Works Wall**:
+  - **Ask My Docs**: Hybrid-retrieval RAG in a single Go binary with citation enforcement & grounding guards.
+  - **Senpai's PDF Workshop**: Local-first PDF toolkit with 44+ operations, PySide6 desktop GUI & CLI.
+  - **BitChord**: Modern YouTube music client with clean Apple Music aesthetics (contributor).
+  - **HAFT-XAI**: Hierarchical Attention Feature Tokenizer for Industrial IoT intrusion detection with Explainable AI.
+- **Interactive About Me Area**:
+  - Custom in-game 3D photo frames sitting on the desk/wall featuring Nishanth's personal & project photos.
+  - Full About modal with background, interests, and profile links.
+- **Atmospheric Audio**: Background music (*Aria Math* from Minecraft) and interactive sound effects powered by Howler.js.
+- **Automated GitHub Actions CI/CD**: Built and deployed automatically to GitHub Pages on every push to `main`.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tech Stack
 
-## Expanding the ESLint configuration
+- **Framework**: React 18
+- **3D Graphics**: Three.js, React Three Fiber, React Three Drei, KTX2/Basis Texture Compression
+- **State Management**: Zustand
+- **Audio**: Howler.js
+- **Styling**: SCSS, Custom Minecraft Pixel Typography
+- **Bundler & Tooling**: Vite 6
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 📦 Local Development
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+```bash
+# Clone the repository
+git clone https://github.com/ArekatlaNishanthchowdary/portfolio-nishanth.git
+cd portfolio-nishanth
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+# Install dependencies
+npm install
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Start local dev server
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🌐 Live Deployment
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Hosted on GitHub Pages at:
+[https://arekatlanishanthchowdary.github.io/portfolio-nishanth/](https://arekatlanishanthchowdary.github.io/portfolio-nishanth/)
