@@ -85,9 +85,6 @@ const Info = () => {
         <Button href="https://github.com/ArekatlaNishanthchowdary" type={"link"}>
           ⭐ Visit My GitHub Profile
         </Button>
-        <Button href="https://arekatlanishanthchowdary.github.io/portfolio-nishanth/" type={"link"}>
-          🌐 View My Primary Portfolio
-        </Button>
 
         {data.content.map((section, index) => (
           <div key={index} className="data-section">

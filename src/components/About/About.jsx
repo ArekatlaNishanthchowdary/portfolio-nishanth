@@ -5,7 +5,6 @@ const aboutMeData = {
   one: {
     name: "Nishanth (Arekatla Nishanth Chowdary)",
     imageUrl: `${import.meta.env.BASE_URL}images/about/about-1.jpeg`,
-    portfolioLink: "https://arekatlanishanthchowdary.github.io/portfolio-nishanth/",
     githubLink: "https://github.com/ArekatlaNishanthchowdary",
     content: [
       {
@@ -42,10 +41,7 @@ const About = () => {
         <img src={data.imageUrl} alt={data.name} className="data-image" />
       </div>
 
-      <div style={{ display: "flex", flexDirection: "column", gap: "8px", marginBottom: "16px" }}>
-        <Button href={data.portfolioLink} type={"link"}>
-          🌐 View My Primary Portfolio
-        </Button>
+      <div style={{ marginBottom: "16px" }}>
         <Button href={data.githubLink} type={"link"}>
           ⭐ Visit My GitHub Profile
         </Button>
