@@ -7,6 +7,7 @@ import { useModalStore } from "../stores/modalStore";
 
 import About from "../../components/About/About";
 import Project from "../../components/Project/Project";
+import nishanthSignData from "./nishanthSignGeom.json";
 
 export default function Model({ progress = 0, pulseIntensity = 0, ...props }) {
   const { nodes, materials } = useGLTFWithKTX2(
@@ -15,13 +16,12 @@ export default function Model({ progress = 0, pulseIntensity = 0, ...props }) {
   const [hoveredMesh, setHoveredMesh] = useState(null);
   const { openModal } = useModalStore();
 
-  // Load project images, full sign banner & About Me photos (1.jpeg, 2.jpeg, 3.jpeg, 4.jpeg)
+  // Load project images & About Me photos (1.jpeg, 2.jpeg, 3.jpeg, 4.jpeg)
   const [
     askDocsTex,
     senpaiTex,
     bitchordTex,
     haftXaiTex,
-    fullSignTex,
     aboutFrame1Tex,
     aboutFrame2Tex,
     aboutFrame3Tex,
@@ -31,7 +31,6 @@ export default function Model({ progress = 0, pulseIntensity = 0, ...props }) {
     `${import.meta.env.BASE_URL}images/senpai.png`,
     `${import.meta.env.BASE_URL}images/bitchord.png`,
     `${import.meta.env.BASE_URL}images/haft-xai.png`,
-    `${import.meta.env.BASE_URL}images/full_sign_nishanth.png`,
     `${import.meta.env.BASE_URL}images/about/frame-1.jpg`,
     `${import.meta.env.BASE_URL}images/about/frame-2.jpg`,
     `${import.meta.env.BASE_URL}images/about/frame-3.jpg`,
@@ -223,6 +222,24 @@ export default function Model({ progress = 0, pulseIntensity = 0, ...props }) {
     return geom;
   }, []);
 
+  // 3D Native Minecraft Voxel Font for Nishanth's
+  const nishanthSignGeom = useMemo(() => {
+    const geom = new THREE.BufferGeometry();
+    geom.setAttribute(
+      "position",
+      new THREE.BufferAttribute(new Float32Array(nishanthSignData.positions), 3)
+    );
+    geom.setAttribute(
+      "normal",
+      new THREE.BufferAttribute(new Float32Array(nishanthSignData.normals), 3)
+    );
+    geom.setAttribute(
+      "uv",
+      new THREE.BufferAttribute(new Float32Array(nishanthSignData.uvs), 2)
+    );
+    return geom;
+  }, []);
+
   return (
     <group {...props} dispose={null}>
       {/* Original detail geometry */}
@@ -283,7 +300,7 @@ export default function Model({ progress = 0, pulseIntensity = 0, ...props }) {
         }}
       />
 
-      {/* Frame 4: ShadowAssist */}
+      {/* Frame 4: HAFT-XAI */}
       <mesh
         geometry={nodes.Project_Four.geometry}
         material={getMaterial("four", [0.32, 0.43])}
@@ -329,11 +346,11 @@ export default function Model({ progress = 0, pulseIntensity = 0, ...props }) {
         </group>
       ))}
 
-      {/* Upper dark wooden banner: Nishanth's Selected Works */}
-      <mesh position={[-9.039, 70.356, -4.102]}>
-        <planeGeometry args={[1.788, 0.565]} />
-        <meshBasicMaterial map={fullSignTex} />
-      </mesh>
+      {/* 3D Native Voxel Text: Nishanth's */}
+      <mesh
+        geometry={nishanthSignGeom}
+        material={materials["MergedBake_Baked.010"]}
+      />
 
       {/* 3D In-Game Photo Frames in About Me section */}
       <mesh
