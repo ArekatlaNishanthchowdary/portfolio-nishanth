@@ -1,0 +1,105 @@
+@use "../../index.scss" as styles;
+
+.explore-toggle-button {
+  color: styles.$color-base-dark-gray-four;
+  box-shadow: inset 2px 2px #ffffffc0, inset -2px -2px #323232c0;
+  background-color: styles.$color-base-gray;
+  border: 2px solid styles.$color-base-dark-gray-four;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  position: absolute;
+  width: 43px;
+  height: 43px;
+  top: 24px;
+  right: 144px;
+  z-index: 95;
+
+  &:hover,
+  &.active {
+    color: white;
+    border: 2px solid white;
+    background-color: styles.$color-base-green;
+    cursor: pointer;
+    box-shadow: inset 2px 2px #53d95ac0, inset -2px -2px #118316c0;
+  }
+
+  // Pointer lock + WASD need a mouse and keyboard
+  @media (hover: none), (pointer: coarse) {
+    display: none;
+  }
+}
+
+.explore-crosshair {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  transform: translate(-50%, -50%);
+  z-index: 90;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  background:
+    linear-gradient(white, white) center / 2px 100% no-repeat,
+    linear-gradient(white, white) center / 100% 2px no-repeat;
+}
+
+.explore-menu {
+  position: absolute;
+  inset: 0;
+  z-index: 90;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  background-color: styles.$color-base-overlay-gray;
+}
+
+.explore-menu-panel {
+  width: 100%;
+  max-width: 420px;
+  padding: 24px;
+  background-color: styles.$color-base-dark-gray-three;
+  border: 4px solid styles.$color-base-dark-gray-four;
+  box-shadow: inset 2px 2px #ffffff30, inset -2px -2px #00000060;
+  color: white;
+}
+
+.explore-menu-title {
+  margin: 0 0 16px;
+  font-size: 24px;
+  text-align: center;
+  color: styles.$color-font-primary-yellow;
+}
+
+.explore-menu-controls {
+  margin: 0 0 16px;
+  font-size: 16px;
+}
+
+.explore-menu-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 4px 0;
+
+  dt {
+    color: styles.$color-font-primary-yellow;
+  }
+
+  dd {
+    margin: 0;
+    text-align: right;
+  }
+}
+
+.explore-menu-actions {
+  display: flex;
+  flex-direction: column;
+
+  .button-default {
+    margin-bottom: 0;
+  }
+}

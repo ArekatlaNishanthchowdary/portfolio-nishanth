@@ -2,7 +2,8 @@ import { React, Suspense, useState, useRef } from "react";
 
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
-import { Environment } from "@react-three/drei";
+import { Environment, Bvh } from "@react-three/drei";
+import { useExploreStore } from "./stores/exploreStore";
 
 import House from "./models/HouseT";
 import BackGrass from "./models/BackGrassT";
@@ -24,6 +25,7 @@ const Scene = ({
   lerpFactor,
   mouseOffset,
 }) => {
+  const isExploring = useExploreStore((s) => s.isExploring);
   const [pulseIntensity, setPulseIntensity] = useState(0);
   const [rotationBufferQuat] = useState(
     new THREE.Quaternion().setFromEuler(new THREE.Euler(-0.12, 0.17, 0.02))
@@ -140,6 +142,12 @@ const Scene = ({
       const newPulseIntensity = (Math.sin(state.clock.elapsedTime * 3) + 1) / 2;
       setPulseIntensity(newPulseIntensity);
 
+      // ExploreControls drives the camera; keep our rotation in sync so leaving glides back
+      if (useExploreStore.getState().isExploring) {
+        rotationBufferQuat.copy(cameraGroup.current.quaternion);
+        return;
+      }
+
       let newProgress = THREE.MathUtils.lerp(
         scrollProgress,
         targetScrollProgress.current,
@@ -211,16 +219,20 @@ const Scene = ({
         ]}
       />
       <Suspense fallback={null}>
-        <House />
-        <BackGrass />
-        <Detail progress={scrollProgress} pulseIntensity={pulseIntensity} />
-        <Extras />
-        <ExtrasTwo />
-        <ExtrasThree progress={scrollProgress} />
-        <FrontGrass />
-        <GrassBlocks />
-        <GrassSides />
-        <Mobs progress={scrollProgress} />
+        {/* BVH makes the walk-mode collision rays (and hover picking) cheap */}
+        <Bvh firstHitOnly>
+          <House />
+          <BackGrass />
+          {/* exploring: no proximity pulse (crosshair hover instead), door held open */}
+          <Detail progress={isExploring ? -1 : scrollProgress} pulseIntensity={pulseIntensity} />
+          <Extras />
+          <ExtrasTwo />
+          <ExtrasThree progress={isExploring ? 0.5 : scrollProgress} />
+          <FrontGrass />
+          <GrassBlocks />
+          <GrassSides />
+          <Mobs progress={scrollProgress} userData={{ noCollide: true }} />
+        </Bvh>
       </Suspense>
     </>
   );

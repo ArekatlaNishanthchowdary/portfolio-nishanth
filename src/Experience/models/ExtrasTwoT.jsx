@@ -7,6 +7,18 @@ import React from "react";
 
 import { useGLTFWithKTX2 } from "../utils/useGLTFWithKTX2";
 import { convertMaterialsToMeshBasicMaterial } from "../utils/convertMaterial";
+import { blockGeometry } from "../utils/blockGeometry";
+
+// The dirt path beside the house's left wall was never modelled (a hole to the void): finish it
+// with path blocks, textured from this model's own path tile.
+const PATH = { path: [0.59675, 0.69946, 0.05897, 0, 0, -0.0591] };
+const pathGeometry = blockGeometry(
+  [
+    [[-15.03, 63.85, -4.19], [-13.03, 64.786, 0.81], "path"],
+    [[-13.03, 63.85, -3.19], [-12.03, 64.786, -2.19], "path"],
+  ],
+  PATH
+);
 
 export default function Model(props) {
   const { nodes, materials } = useGLTFWithKTX2(
@@ -23,6 +35,7 @@ export default function Model(props) {
         position={[-8.228, 64.814, 1.892]}
         rotation={[Math.PI / 2, 0, 0]}
       />
+      <mesh geometry={pathGeometry} material={materials["MergedBake_Baked.020"]} />
     </group>
   );
 }

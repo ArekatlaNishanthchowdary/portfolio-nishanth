@@ -67,6 +67,7 @@ export default function Model({ progress = 0, ...props }) {
         material={materials["MergedBake_Baked.006"]}
         position={[-2.935, 67.848, 0.906]}
         rotation={[Math.PI / 2, 0, 0]}
+        userData={{ noCollide: true }} // explore mode: the open leaf would snag a 0.6-wide player in the doorway
       />
     </group>
   );

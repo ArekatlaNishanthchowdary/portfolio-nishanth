@@ -1,11 +1,37 @@
 import { React, useEffect, useRef, useState } from "react";
 
 import * as THREE from "three";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, events } from "@react-three/fiber";
 import { PerspectiveCamera } from "@react-three/drei";
 import Scene from "./Scene";
+import ExploreControls from "./ExploreControls";
 import { useModalStore } from "./stores/modalStore";
+import { useExploreStore } from "./stores/exploreStore";
 import normalizeWheel from "normalize-wheel";
+
+const REACH = 4.5; // blocks, like Minecraft
+
+// Pointer locked: aim from the crosshair (screen centre).
+// Exploring but unlocked (pause menu / modal): clicks must not reach the 3D frames behind it.
+const exploreAwareEvents = (store) => {
+  const base = events(store);
+  return {
+    ...base,
+    compute(event, state) {
+      if (!document.pointerLockElement) return base.compute(event, state);
+      state.pointer.set(0, 0);
+      state.raycaster.setFromCamera(state.pointer, state.camera);
+    },
+    filter: (hits, state) => {
+      if (!useExploreStore.getState().isExploring) return hits;
+      if (!document.pointerLockElement) return [];
+      // R3F only raycasts clickable meshes, so walls don't hide them: stop at the nearest surface
+      const nearest = state.raycaster.intersectObject(state.scene, true)[0];
+      const limit = Math.min(REACH, nearest ? nearest.distance + 0.01 : REACH);
+      return hits.filter((hit) => hit.distance <= limit);
+    },
+  };
+};
 
 const Experience = () => {
   const cameraGroup = useRef();
@@ -17,11 +43,12 @@ const Experience = () => {
   const isSwiping = useRef(false);
   const mouseOffset = useRef(new THREE.Vector3());
   const { isModalOpen } = useModalStore();
+  const isExploring = useExploreStore((s) => s.isExploring);
   const lastTouchY = useRef(null);
 
   useEffect(() => {
     const handleWheel = (e) => {
-      if (isModalOpen) return;
+      if (isModalOpen || isExploring) return;
       const normalized = normalizeWheel(e);
 
       targetScrollProgress.current +=
@@ -42,7 +69,7 @@ const Experience = () => {
     };
 
     const handleTouchStart = (e) => {
-      if (isModalOpen) return;
+      if (isModalOpen || isExploring) return;
       isSwiping.current = true;
       lastTouchY.current = e.touches[0].clientY;
     };
@@ -65,7 +92,7 @@ const Experience = () => {
     };
 
     const handleMouseDown = (e) => {
-      if (isModalOpen || e.pointerType === "touch") return;
+      if (isModalOpen || isExploring || e.pointerType === "touch") return;
       isSwiping.current = true;
     };
 
@@ -99,11 +126,15 @@ const Experience = () => {
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchend", handleTouchEnd);
     };
-  }, [isModalOpen]);
+  }, [isModalOpen, isExploring]);
 
   return (
     <>
-      <Canvas flat={true} eventSource={document.getElementById("root")}>
+      <Canvas
+        flat={true}
+        eventSource={document.getElementById("root")}
+        events={exploreAwareEvents}
+      >
         <color attach="background" args={["#2c2727"]} />
         <Scene
           cameraGroup={cameraGroup}
@@ -114,6 +145,7 @@ const Experience = () => {
           lerpFactor={lerpFactor}
           mouseOffset={mouseOffset}
         />
+        <ExploreControls cameraGroup={cameraGroup} camera={camera} />
         <group ref={cameraGroup}>
           <PerspectiveCamera
             ref={camera}
