@@ -36,15 +36,15 @@ const projectData = {
         header: "About the Project",
         paragraphs: [
           "Unpacks FreeArc game repacks (DODI, FitGirl) straight into a game folder without running their installer, checking every file's CRC as it goes. Ships as a Windows app and a command-line tool.",
-          "Problem Solved: An installer needs room for the repack and the whole game at once. Crusader Kings III's 6.05 GB repack installs to 19.87 GB, so it needs about 26 GB free.",
-          "Architecture: Each block decodes through a pipeline of stages: the repack's 32-bit CLS plug-ins in a small host process, arc.ini decoders as processes, and Rust ports of FreeArc's built-in decoders as threads. With --free-as-read, decoded bytes are zeroed as sparse ranges, so NTFS gives the space back mid-extraction.",
+          "Problem Solved: An installer needs room for the repack and the whole game at once. Crusader Kings III's 6.05 GB repack installs to 19.87 GB, so it needs about 26 GB of disk.",
+          "Architecture: Each block decodes through a pipeline of stages: the repack's 32-bit CLS plug-ins in a small host process, arc.ini decoders as processes, and Rust ports of FreeArc's built-in decoders as threads. With --free-as-read, the parts of the repack it has already read are zeroed as sparse ranges, so NTFS gives that space back mid-extraction.",
         ],
       },
       {
         header: "Tech Stack & Results",
         paragraphs: [
           " - Tech: Rust, C (32-bit CLS host), egui, NTFS sparse files, Inno Setup script parsing",
-          " - Results: Crusader Kings III in 13.94 GB instead of ~26 GB · every file CRC-checked · tested on repacks up to 152.9 GB",
+          " - Results: Crusader Kings III needs 13.94 GB free instead of 19.99 GB · every file CRC-checked · tested on games up to 152.9 GB unpacked",
         ],
       },
     ],
