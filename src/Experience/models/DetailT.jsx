@@ -18,7 +18,7 @@ export default function Model({ progress = 0, pulseIntensity = 0, ...props }) {
   // Load project images & About Me photos (1.jpeg, 2.jpeg, 3.jpeg, 4.jpeg)
   const [
     askDocsTex,
-    senpaiTex,
+    unrepackTex,
     bitchordTex,
     haftXaiTex,
     aboutFrame1Tex,
@@ -27,7 +27,7 @@ export default function Model({ progress = 0, pulseIntensity = 0, ...props }) {
     aboutFrame4Tex,
   ] = useTexture([
     `${import.meta.env.BASE_URL}images/ask-my-docs.png`,
-    `${import.meta.env.BASE_URL}images/senpai.png`,
+    `${import.meta.env.BASE_URL}images/unrepack.png`,
     `${import.meta.env.BASE_URL}images/bitchord.png`,
     `${import.meta.env.BASE_URL}images/haft-xai.png`,
     `${import.meta.env.BASE_URL}images/about/frame-1.jpg`,
@@ -38,7 +38,7 @@ export default function Model({ progress = 0, pulseIntensity = 0, ...props }) {
 
   const projectNames = {
     one: "Ask My Docs",
-    two: "Senpai's PDF Workshop",
+    two: "unrepack",
     three: "BitChord (Contributor)",
     four: "HAFT-XAI (IIoT NIDS)",
   };
@@ -115,7 +115,7 @@ export default function Model({ progress = 0, pulseIntensity = 0, ...props }) {
   };
 
   const labelOneTex = useMemo(() => createLabelTexture("Ask My Docs"), []);
-  const labelTwoTex = useMemo(() => createLabelTexture("Senpai PDF"), []);
+  const labelTwoTex = useMemo(() => createLabelTexture("unrepack"), []);
   const labelThreeTex = useMemo(() => createLabelTexture("BitChord"), []);
   const labelFourTex = useMemo(() => createLabelTexture("HAFT-XAI"), []);
 
@@ -135,7 +135,7 @@ export default function Model({ progress = 0, pulseIntensity = 0, ...props }) {
 
   const projects = [
     { id: "one", x: -10.528, tex: askDocsTex, labelTex: labelOneTex },
-    { id: "two", x: -9.532, tex: senpaiTex, labelTex: labelTwoTex },
+    { id: "two", x: -9.532, tex: unrepackTex, labelTex: labelTwoTex },
     { id: "three", x: -8.536, tex: bitchordTex, labelTex: labelThreeTex },
     { id: "four", x: -7.541, tex: haftXaiTex, labelTex: labelFourTex },
   ];
@@ -255,7 +255,7 @@ export default function Model({ progress = 0, pulseIntensity = 0, ...props }) {
         }}
       />
 
-      {/* Frame 2: Senpai PDF */}
+      {/* Frame 2: unrepack */}
       <mesh
         geometry={nodes.Project_Two.geometry}
         material={getMaterial("two", [0.32, 0.43])}

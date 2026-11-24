@@ -9,7 +9,7 @@ Built with **React**, **Three.js / React Three Fiber (@react-three/fiber)**, **D
 - **Interactive 3D Minecraft Scene**: Real-time camera scrolling through a handcrafted voxel room with day/night aesthetic.
 - **Selected Works Wall**:
   - **Ask My Docs**: Hybrid-retrieval RAG in a single Go binary with citation enforcement & grounding guards.
-  - **Senpai's PDF Workshop**: Local-first PDF toolkit with 44+ operations, PySide6 desktop GUI & CLI.
+  - **unrepack**: Rust app and CLI that unpacks FreeArc game repacks without their installer, freeing the repack's space as it is read.
   - **BitChord**: Modern YouTube music client with clean Apple Music aesthetics (contributor).
   - **HAFT-XAI**: Hierarchical Attention Feature Tokenizer for Industrial IoT intrusion detection with Explainable AI.
 - **Interactive About Me Area**:

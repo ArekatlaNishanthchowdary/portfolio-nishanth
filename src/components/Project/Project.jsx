@@ -27,24 +27,24 @@ const projectData = {
     ],
   },
   two: {
-    name: "Senpai's PDF Workshop",
-    imageUrl: `${import.meta.env.BASE_URL}images/senpai.png`,
-    externalLink: "https://github.com/ArekatlaNishanthchowdary/senpais-pdf-workshop",
-    buttonText: "⭐ View senpais-pdf-workshop on GitHub",
+    name: "unrepack",
+    imageUrl: `${import.meta.env.BASE_URL}images/unrepack-wide.png`, // wide shot; the square unrepack.png is for the wall frame
+    externalLink: "https://github.com/ArekatlaNishanthchowdary/unrepack",
+    buttonText: "⭐ View unrepack on GitHub",
     content: [
       {
         header: "About the Project",
         paragraphs: [
-          "Local PDF toolkit with 44+ operations across a PySide6 desktop app and a CLI — both generated from a single operation registry. No upload, no account, no Docker.",
-          "Problem Solved: Web-based PDF tools require uploading sensitive documents just to merge, split, reorder, compress, or watermark them.",
-          "Architecture: Each PDF operation is one clean @register-decorated function. The CLI parser, GUI layout, and interactive parameter forms all auto-generate from that registry with zero boilerplate.",
+          "Unpacks FreeArc game repacks (DODI, FitGirl) straight into a game folder without running their installer, checking every file's CRC as it goes. Ships as a Windows app and a command-line tool.",
+          "Problem Solved: An installer needs room for the repack and the whole game at once. Crusader Kings III's 6.05 GB repack installs to 19.87 GB, so it needs about 26 GB free.",
+          "Architecture: Each block decodes through a pipeline of stages: the repack's 32-bit CLS plug-ins in a small host process, arc.ini decoders as processes, and Rust ports of FreeArc's built-in decoders as threads. With --free-as-read, decoded bytes are zeroed as sparse ranges, so NTFS gives the space back mid-extraction.",
         ],
       },
       {
-        header: "Tech Stack & Quality",
+        header: "Tech Stack & Results",
         paragraphs: [
-          " - Tech: Python, PySide6, pypdf, pikepdf, Dynamic CLI Registry",
-          " - Metrics: 46 operations · 100 unit tests passing · zero interface code per tool",
+          " - Tech: Rust, C (32-bit CLS host), egui, NTFS sparse files, Inno Setup script parsing",
+          " - Results: Crusader Kings III in 13.94 GB instead of ~26 GB · every file CRC-checked · tested on repacks up to 152.9 GB",
         ],
       },
     ],

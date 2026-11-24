@@ -18,7 +18,7 @@ const aboutMeData = {
       {
         header: "What Drives Me",
         paragraphs: [
-          " - Local-First & Privacy: Software should belong to the user. I love building tools like Ask-My-Docs and Senpai's PDF Workshop that deliver full power locally with zero cloud dependencies or telemetry.",
+          " - Local-First & Privacy: Software should belong to the user. I love building tools like Ask-My-Docs and unrepack that deliver full power locally with zero cloud dependencies or telemetry.",
           " - Systems & Efficiency: Deep curiosity for hardware acceleration — optimizing models with CUDA, TensorRT, Unsloth, and quantization for real-world low latency.",
           " - Collaborative Growth: Leading club initiatives, open-source contributions, and working with talented peers across challenging engineering problems.",
           " - First-Principles Engineering: Whether it's quantum-enhanced wafer failure prediction or hierarchical transformers for IIoT intrusion detection, I enjoy tackling complex problems from the ground up.",

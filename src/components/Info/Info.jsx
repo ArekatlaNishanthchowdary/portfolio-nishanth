@@ -18,7 +18,7 @@ const infoMeData = {
         paragraphs: [
           " - *Ask-My-Docs*: Local-first RAG document Q&A assistant in a single Go binary. Powered by Qdrant, Ollama, hybrid retrieval, and strict citation grounding guards (100% private & offline).",
           " - *HAFT-XAI*: Hierarchical FT-Transformer with Hard-Concrete gating for explainable intrusion detection in Industrial IoT (CIC-IIoT-2025), under Dr. Raj Kumar Batchu.",
-          " - *senpais-pdf-workshop*: Local PDF toolkit with 46 operations across a PySide6 GUI and CLI, generated from a single operation registry.",
+          " - *unrepack*: Rust app and CLI that unpacks FreeArc game repacks without their installer, freeing the repack's space as it is read.",
           " - *BitChord (Contributor)*: Modern YouTube music client with clean aesthetics inspired by Apple Music.",
           " - *Handsfree / Project Hollow*: Local, open-source autonomous computer-use agent driving desktop and browser tasks with action-level safety guardrails and O(1) hierarchical memory.",
           " - *Smart Traffic System*: Real-time vehicle detection and adaptive traffic control using YOLOv8x and OpenCV.",
